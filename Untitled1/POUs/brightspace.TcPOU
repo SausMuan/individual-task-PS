@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="brightspace" Id="{1627b2b4-c2df-41ad-9fd7-5cb03a7c9461}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM brightspace
+VAR
+	
+	button : BOOL;
+
+	
+	timer1: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[timer1(IN:=button , PT:=T#3S , Q=>GVL.light , ET=> );
+]]></ST>
+    </Implementation>
+    <LineIds Name="brightspace">
+      <LineId Id="10" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
