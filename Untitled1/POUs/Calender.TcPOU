@@ -13,14 +13,14 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[calenderTimer(IN:=Start , PT:= T#2.5S, Q=> Cycle , ET=> );
+      <ST><![CDATA[calenderTimer(IN:=Start , PT:= T#1S, Q=> Cycle , ET=> );
 
 IF Cycle = TRUE THEN
 	GVL.Day := GVL.Day + 1;
 	Start := FALSE;
 END_IF
 
-AnotherOne(IN:=on AND NOT Start , PT:=T#2.5S , Q=>Morning , ET=> );
+AnotherOne(IN:=on AND NOT Start , PT:=T#1S , Q=>Morning , ET=> );
 
 DayNight(SET1:=Morning , RESET:=Cycle , Q1=>Start );]]></ST>
     </Implementation>
