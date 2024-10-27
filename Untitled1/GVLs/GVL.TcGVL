@@ -5,6 +5,7 @@
 VAR_GLOBAL
 	
 	light : BOOL;
+	Day : INT:= 0;
 
 END_VAR]]></Declaration>
   </GVL>
