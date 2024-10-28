@@ -4,9 +4,12 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	
-	light : BOOL;
+	StartPls : BOOL;
 	Day : INT:= 0;
+	Finished: BOOL := 0;
+	MainDueIn: INT := 0;
 
+	Cycle: BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -13,19 +13,26 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[calenderTimer(IN:=Start , PT:= T#1S, Q=> Cycle , ET=> );
+      <ST><![CDATA[calenderTimer(IN:=Start , PT:= T#0.25S, Q=> Cycle , ET=> );
 
 IF Cycle = TRUE THEN
 	GVL.Day := GVL.Day + 1;
+	GVL.Cycle := TRUE;
 	Start := FALSE;
+ELSE
+	GVL.Cycle := FALSE;
 END_IF
 
-AnotherOne(IN:=on AND NOT Start , PT:=T#1S , Q=>Morning , ET=> );
+AnotherOne(IN:=on AND NOT Start , PT:=T#0.25S , Q=>Morning , ET=> );
 
 DayNight(SET1:=Morning , RESET:=Cycle , Q1=>Start );]]></ST>
     </Implementation>
     <LineIds Name="Calender">
-      <LineId Id="18" Count="8" />
+      <LineId Id="18" Count="3" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="23" Count="3" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

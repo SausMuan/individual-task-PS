@@ -30,7 +30,7 @@
     <Compile Include="POUs\brightspace.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\Student.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Calender.TcPOU">

@@ -15,6 +15,11 @@
               <v n="TextDefault">"daytime"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
+            <o>
+              <v n="TextID">"909"</v>
+              <v n="TextDefault">"task finished"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
           </l>
           <l n="Languages" t="ArrayList" />
           <v n="GuidInit">{55a0034f-c34d-4035-b1eb-318172e5e0b4}</v>
