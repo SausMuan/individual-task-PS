@@ -4,41 +4,49 @@
     <Declaration><![CDATA[PROGRAM brightspace
 VAR
 	
-	TaskMaster: ARRAY[1..2, 1..3] OF INT := [
-        0, 0, 1,    // 30 day task
-        0, 0, 1     // 10 day task
+	TaskMaster: ARRAY[1..3] OF INT := [
+        0, 0, 1    // 30 day task
     ];
 
 	TasksGiven: INT;
+	TasksCompleted: INT;
 	
-	
+	Late: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//how many days till certain assignment needs to be done
-GVL.MainDueIn := TaskMaster[1, 2] - GVL.Day;
+GVL.MainDueIn := TaskMaster[2] - GVL.Day;
 
 //make task
-IF TaskMaster[1, 1] = 0 OR GVL.MainDueIn < 0 AND TaskMaster[1,3] = 1 THEN
+IF TaskMaster[1] = 0 OR GVL.MainDueIn < 1 AND TaskMaster[3] = 1 THEN
 	GVL.Finished := FALSE;
-	TaskMaster[1, 1] := TasksGiven + 1;
-	TaskMaster[1, 2] := GVL.Day + 30;
-	TaskMaster[1, 3] := 0;
+	TaskMaster[1] := TasksGiven + 1;
+	TaskMaster[2] := GVL.Day + 30;
+	TaskMaster[3] := 0;
+	
+	
+	//visualisation stuff
 	TasksGiven := TasksGiven +1;
+	TasksCompleted := TasksGiven - 1;
 	GVL.StartPls := TRUE;
 END_IF
 
 //arrays and global variables dont mix
 IF GVL.Finished = TRUE THEN				//yes im using this if statement as an SR flipflop
-	TaskMaster[1, 3] := 1;
+	TaskMaster[3] := 1;
 END_IF
  
 //send signal once to remind the student to pls start doing something
-IF GVL.MainDueIn = 30 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 1 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -5 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -10 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -20 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -30 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -40 AND TaskMaster[1,3] = 0 THEN 
+IF GVL.MainDueIn = 30 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 1 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -5 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -10 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -20 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -30 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -40 AND TaskMaster[3] = 0 THEN 
 	GVL.StartPls := TRUE;
 ELSE
 	GVL.StartPls := FALSE;		
 END_IF 
+
+IF GVL.MainDueIn <0 THEN
+	Late := TRUE;
+END_IF
 
 ]]></ST>
     </Implementation>
@@ -51,8 +59,10 @@ END_IF
       <LineId Id="31" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="69" Count="0" />
+      <LineId Id="80" Count="2" />
       <LineId Id="39" Count="0" />
-      <LineId Id="48" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="83" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="50" Count="0" />
       <LineId Id="42" Count="0" />
@@ -64,6 +74,9 @@ END_IF
       <LineId Id="71" Count="0" />
       <LineId Id="65" Count="1" />
       <LineId Id="47" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="76" Count="1" />
       <LineId Id="64" Count="0" />
       <LineId Id="63" Count="0" />
     </LineIds>

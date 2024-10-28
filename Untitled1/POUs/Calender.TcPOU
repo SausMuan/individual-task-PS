@@ -10,10 +10,11 @@ VAR
 	Start: BOOL;
 	On: BOOL;
 	Morning: BOOL;
+	HalfADay: TIME := T#25ms;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[calenderTimer(IN:=Start , PT:= T#0.25S, Q=> Cycle , ET=> );
+      <ST><![CDATA[calenderTimer(IN:=Start , PT:= HalfADay, Q=> Cycle , ET=> );
 
 IF Cycle = TRUE THEN
 	GVL.Day := GVL.Day + 1;
@@ -23,7 +24,7 @@ ELSE
 	GVL.Cycle := FALSE;
 END_IF
 
-AnotherOne(IN:=on AND NOT Start , PT:=T#0.25S , Q=>Morning , ET=> );
+AnotherOne(IN:=on AND NOT Start , PT:=HalfADay , Q=>Morning , ET=> );
 
 DayNight(SET1:=Morning , RESET:=Cycle , Q1=>Start );]]></ST>
     </Implementation>

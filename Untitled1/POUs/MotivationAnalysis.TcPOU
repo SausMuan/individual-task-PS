@@ -5,18 +5,22 @@
 VAR_INPUT
 END_VAR
 VAR
-	minVal: INT := 1; 
-	maxVal: INT := 100;
 	Roll4Motivation: DRAND;
 	RandomReal: LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Roll4Motivation(Seed:=GVL.Day , Num=>RandomReal );
-MotivationAnalysis := minVal + LREAL_TO_INT(RandomReal * (maxVal - minVal + 1));]]></ST>
+      <ST><![CDATA[//DRAND function with daynumber as seed
+Roll4Motivation(Seed:=GVL.Day , Num=>RandomReal );
+
+//changes the range from 0-1 to 1-100
+MotivationAnalysis := 1 + LREAL_TO_INT (RandomReal * 75);]]></ST>
     </Implementation>
     <LineIds Name="MotivationAnalysis">
+      <LineId Id="15" Count="0" />
       <LineId Id="10" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>
