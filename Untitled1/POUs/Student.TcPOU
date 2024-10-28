@@ -9,6 +9,8 @@ VAR
 	RisingSun: R_TRIG;
 	RSun: BOOL;
 	Motivation: INT;
+	
+	PulseTimer: TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -29,7 +31,13 @@ IF StudentNotification = TRUE THEN
 		GVL.Finished := TRUE;
 	ELSIF (GVL.MainDueIn*-1) + Motivation < 69 THEN
 		DontWantTo := TRUE;
+		PulseTimer(IN := TRUE, PT := T#50MS);
 	END_IF
+END_IF
+
+IF PulseTimer.Q THEN
+    DontWantTo := FALSE;
+    PulseTimer(IN := FALSE);
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Student">
@@ -49,8 +57,12 @@ END_IF]]></ST>
       <LineId Id="15" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="33" Count="1" />
+      <LineId Id="66" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="16" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="67" Count="2" />
+      <LineId Id="55" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
