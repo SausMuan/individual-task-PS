@@ -30,6 +30,9 @@
     <Compile Include="POUs\brightspace.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\MotivationAnalysis.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Student.TcPOU">
       <SubType>Code</SubType>
     </Compile>

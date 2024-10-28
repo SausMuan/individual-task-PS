@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MotivationAnalysis" Id="{0e4e10b0-3f52-40d4-a7e0-0f02424bf929}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION MotivationAnalysis : INT
+VAR_INPUT
+END_VAR
+VAR
+	minVal: INT := 1; 
+	maxVal: INT := 100;
+	Roll4Motivation: DRAND;
+	RandomReal: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Roll4Motivation(Seed:=GVL.Day , Num=>RandomReal );
+MotivationAnalysis := minVal + LREAL_TO_INT(RandomReal * (maxVal - minVal + 1));]]></ST>
+    </Implementation>
+    <LineIds Name="MotivationAnalysis">
+      <LineId Id="10" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

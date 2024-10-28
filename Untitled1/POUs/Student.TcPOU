@@ -3,36 +3,31 @@
   <POU Name="Student" Id="{f7fde937-a145-4461-be69-639376c0a1a8}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Student
 VAR
-	minVal: INT := 1; 
-	maxVal: INT := 100;
-	Roll4Motivation: DRAND;
-	RandomReal: REAL;
-	Moti: INT;
-	StartWorking: SR;
+	Phone: SR;
 	StudentNotification: BOOL;
 	DontWantTo: BOOL;
 	RisingSun: R_TRIG;
 	RSun: BOOL;
+	Motivation: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//set notification
-StartWorking(SET1:=GVL.StartPls , RESET:=GVL.Finished OR DontWantTo , Q1=>StudentNotification );
+Phone(SET1:=GVL.StartPls , RESET:=GVL.Finished OR DontWantTo , Q1=>StudentNotification );
 
 //daily rising edge signal
 RisingSun(CLK:=GVL.Cycle , Q=>RSun );
 
 //daily motivation amount
 IF RSun = TRUE THEN
-	Roll4Motivation(Seed:= , Num=>RandomReal );
-	Moti := minVal + REAL_TO_INT(RandomReal * (maxVal - minVal + 1));
+	Motivation := MotivationAnalysis();
 END_IF
 
 //when the student has a notification pending they will decide what to do with it depending on the amount of motivation they have that given day
 IF StudentNotification = TRUE THEN
-	IF (GVL.MainDueIn*-1) + Moti > 69 THEN
+	IF (GVL.MainDueIn*-1) + Motivation > 69 THEN
 		GVL.Finished := TRUE;
-	ELSIF (GVL.MainDueIn*-1) + Moti < 69 THEN
+	ELSIF (GVL.MainDueIn*-1) + Motivation < 69 THEN
 		DontWantTo := TRUE;
 	END_IF
 END_IF]]></ST>
@@ -47,7 +42,6 @@ END_IF]]></ST>
       <LineId Id="40" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="32" Count="0" />
-      <LineId Id="18" Count="0" />
       <LineId Id="41" Count="0" />
       <LineId Id="47" Count="0" />
       <LineId Id="38" Count="0" />

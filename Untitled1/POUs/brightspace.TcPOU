@@ -20,10 +20,10 @@ GVL.MainDueIn := TaskMaster[1, 2] - GVL.Day;
 
 //make task
 IF TaskMaster[1, 1] = 0 OR GVL.MainDueIn < 0 AND TaskMaster[1,3] = 1 THEN
+	GVL.Finished := FALSE;
 	TaskMaster[1, 1] := TasksGiven + 1;
 	TaskMaster[1, 2] := GVL.Day + 30;
 	TaskMaster[1, 3] := 0;
-	GVL.Finished := FALSE;
 	TasksGiven := TasksGiven +1;
 	GVL.StartPls := TRUE;
 END_IF
@@ -34,7 +34,7 @@ IF GVL.Finished = TRUE THEN				//yes im using this if statement as an SR flipflo
 END_IF
  
 //send signal once to remind the student to pls start doing something
-IF GVL.MainDueIn = 30 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 1 AND TaskMaster[1,3] = 0 THEN 
+IF GVL.MainDueIn = 30 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = 1 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -5 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -10 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -20 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -30 AND TaskMaster[1,3] = 0 OR GVL.MainDueIn = -40 AND TaskMaster[1,3] = 0 THEN 
 	GVL.StartPls := TRUE;
 ELSE
 	GVL.StartPls := FALSE;		
@@ -47,10 +47,10 @@ END_IF
       <LineId Id="67" Count="1" />
       <LineId Id="51" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="73" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="35" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="32" Count="0" />
