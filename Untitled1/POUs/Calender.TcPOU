@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="Calender" Id="{481eedc4-1d9e-4340-907d-d6fb7a0ecc14}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM Calender
+    <Declaration><![CDATA[PROGRAM Calender //adjustable on/off timer program
 VAR
 	DayNight: SR;
 	calenderTimer: TON;
 	AnotherOne: TON;
 	Cycle: BOOL;
 	Start: BOOL;
-	On: BOOL;
+	On: BOOL;			//turn time on/off
 	Morning: BOOL;
-	HalfADay: TIME := T#25ms;
+	HalfADay: TIME := T#1000ms;
 END_VAR
 ]]></Declaration>
     <Implementation>

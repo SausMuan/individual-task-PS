@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="Student" Id="{f7fde937-a145-4461-be69-639376c0a1a8}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM Student
+    <Declaration><![CDATA[PROGRAM Student		//program pretending to be a student
 VAR
-	Phone: SR;
-	StudentNotification: BOOL;
-	DontWantTo: BOOL;
-	RisingSun: R_TRIG;
-	RSun: BOOL;
+	MaxMotivation1: INT := 75; 	//maximum amount of motivation the student can have on a given day
+	Phone: SR;					//phone saves the signal from brightspace as a notification
+	StudentNotification: BOOL;	
+	DontWantTo: BOOL;			//shows the student is not going to do the work
+	MotTrig: R_TRIG;			
+	MotTrigHigh: BOOL;
 	Motivation: INT;
-	PulseTimer: TON;
+	Timer: TON;
 	
-	MotivationTracker: ARRAY[1..25] OF INT;
-	ArrayCount: INT := 1;
+	MotivationTracker: ARRAY[1..25] OF INT;	//tracks motivation for visualisation
+	ArrayCount: INT := 1;					//position in bar graph
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,9 +21,9 @@ END_VAR
 Phone(SET1:=GVL.StartPls , RESET:=GVL.Finished OR DontWantTo , Q1=>StudentNotification );
 
 //daily motivation calculated each morning :)
-RisingSun(CLK:=GVL.Cycle , Q=>RSun );
-IF RSun = TRUE THEN
-	Motivation := MotivationAnalysis();
+MotTrig(CLK:=StudentNotification , Q=>MotTrigHigh );
+IF MotTrigHigh = TRUE THEN
+	Motivation := MotivationAnalysis(MaxMotivation2:=MaxMotivation1 );
 	
 	//visualisation fun
 	MotivationTracker[ArrayCount] := Motivation;
@@ -38,14 +39,14 @@ IF StudentNotification = TRUE THEN
 		GVL.Finished := TRUE;
 	ELSIF (GVL.MainDueIn*-1) + Motivation < 69 THEN
 		DontWantTo := TRUE;
-		PulseTimer(IN := TRUE, PT := T#50MS);
+		Timer(IN := TRUE, PT := T#50MS);
 	END_IF
 END_IF
 
 //turn DontWantTo off for as long as needed
-IF PulseTimer.Q THEN
+IF Timer.Q THEN
     DontWantTo := FALSE;
-    PulseTimer(IN := FALSE);
+    Timer(IN := FALSE);
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Student">

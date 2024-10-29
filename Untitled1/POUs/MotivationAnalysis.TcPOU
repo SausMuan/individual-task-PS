@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="MotivationAnalysis" Id="{0e4e10b0-3f52-40d4-a7e0-0f02424bf929}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION MotivationAnalysis : INT
+    <Declaration><![CDATA[FUNCTION MotivationAnalysis : INT	//function which gives a random number between 0 and the max value
 VAR_INPUT
+	MaxMotivation2: INT;
 END_VAR
 VAR
 	Roll4Motivation: DRAND;
@@ -13,8 +14,8 @@ END_VAR
       <ST><![CDATA[//DRAND function with daynumber as seed
 Roll4Motivation(Seed:=GVL.Day , Num=>RandomReal );
 
-//changes the range from 0-1 to 1-100
-MotivationAnalysis := 1 + LREAL_TO_INT (RandomReal * 75);]]></ST>
+//changes the range from 0-1 to 1-whatever you put as maximum
+MotivationAnalysis := 1 + LREAL_TO_INT (RandomReal * MaxMotivation2);]]></ST>
     </Implementation>
     <LineIds Name="MotivationAnalysis">
       <LineId Id="15" Count="0" />

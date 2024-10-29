@@ -27,7 +27,7 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\brightspace.TcPOU">
+    <Compile Include="POUs\Brightspace.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MotivationAnalysis.TcPOU">

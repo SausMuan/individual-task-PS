@@ -4,12 +4,11 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	
-	StartPls : BOOL;
-	Day : INT:= 0;
-	Finished: BOOL := 0;
-	MainDueIn: INT := 0;
-
-	Cycle: BOOL;
+	StartPls : BOOL;		//signal student to start doing something
+	Day : INT:= 0;			//keeps track of what day it is
+	Finished: BOOL := 0;	//student can signal he has finished an assingment
+	MainDueIn: INT := 0;	//shows how far you are from the deadline
+	Cycle: BOOL;			//shows daycycle
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="brightspace" Id="{1627b2b4-c2df-41ad-9fd7-5cb03a7c9461}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM brightspace
+  <POU Name="Brightspace" Id="{1627b2b4-c2df-41ad-9fd7-5cb03a7c9461}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Brightspace		//program pretending to be brightspace
 VAR
-	
 	TaskMaster: ARRAY[1..3] OF INT := [
         0, 0, 1    // 30 day task
     ];
-
-	TasksGiven: INT;
-	TasksCompleted: INT;
-	
+	TasksGiven: INT;	
 	Late: BOOL;
 END_VAR
 ]]></Declaration>
@@ -24,11 +20,7 @@ IF TaskMaster[1] = 0 OR GVL.MainDueIn < 1 AND TaskMaster[3] = 1 THEN
 	TaskMaster[1] := TasksGiven + 1;
 	TaskMaster[2] := GVL.Day + 30;
 	TaskMaster[3] := 0;
-	
-	
-	//visualisation stuff
 	TasksGiven := TasksGiven +1;
-	TasksCompleted := TasksGiven - 1;
 	GVL.StartPls := TRUE;
 END_IF
 
@@ -38,19 +30,24 @@ IF GVL.Finished = TRUE THEN				//yes im using this if statement as an SR flipflo
 END_IF
  
 //send signal once to remind the student to pls start doing something
-IF GVL.MainDueIn = 30 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 1 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -5 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -10 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -20 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -30 AND TaskMaster[3] = 0 OR GVL.MainDueIn = -40 AND TaskMaster[3] = 0 THEN 
+IF GVL.MainDueIn = 30 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 20 AND TaskMaster[3] = 0 OR GVL.MainDueIn = 10 AND TaskMaster[3] = 0 OR GVL.MainDueIn <= 1 AND TaskMaster[3] = 0 THEN 
 	GVL.StartPls := TRUE;
+	IF GVL.MainDueIn <0 AND TaskMaster[3] = 0 THEN
+		GVL.StartPls := GVL.Cycle;
+	END_IF
 ELSE
 	GVL.StartPls := FALSE;		
 END_IF 
 
 IF GVL.MainDueIn <0 THEN
 	Late := TRUE;
+ELSE 
+	Late := FALSE;
 END_IF
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="brightspace">
+    <LineIds Name="Brightspace">
       <LineId Id="70" Count="0" />
       <LineId Id="67" Count="1" />
       <LineId Id="51" Count="0" />
@@ -59,9 +56,7 @@ END_IF
       <LineId Id="31" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="80" Count="2" />
       <LineId Id="39" Count="0" />
-      <LineId Id="79" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="50" Count="0" />
@@ -72,11 +67,14 @@ END_IF
       <LineId Id="49" Count="0" />
       <LineId Id="45" Count="0" />
       <LineId Id="71" Count="0" />
+      <LineId Id="99" Count="2" />
       <LineId Id="65" Count="1" />
       <LineId Id="47" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="74" Count="0" />
-      <LineId Id="76" Count="1" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="96" Count="1" />
+      <LineId Id="77" Count="0" />
       <LineId Id="64" Count="0" />
       <LineId Id="63" Count="0" />
     </LineIds>
