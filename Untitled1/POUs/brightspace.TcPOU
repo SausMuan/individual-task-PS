@@ -39,13 +39,12 @@ ELSE
 	GVL.StartPls := FALSE;		
 END_IF 
 
+//late indication for visualisation
 IF GVL.MainDueIn <0 THEN
 	Late := TRUE;
 ELSE 
 	Late := FALSE;
-END_IF
-
-]]></ST>
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="Brightspace">
       <LineId Id="70" Count="0" />
@@ -70,13 +69,12 @@ END_IF
       <LineId Id="99" Count="2" />
       <LineId Id="65" Count="1" />
       <LineId Id="47" Count="0" />
+      <LineId Id="110" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="76" Count="0" />
       <LineId Id="96" Count="1" />
       <LineId Id="77" Count="0" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="63" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
